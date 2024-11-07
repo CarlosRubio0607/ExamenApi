@@ -23,20 +23,20 @@ public class ProductoController {
         productos.add(new Producto(3L, "Producto 3", 30.0));
 	}
 	
-	// Obtener todos los productos 
+	// Metodo para obtener todos los productos 
     @GetMapping
     public List<Producto> obtenerTodos() {
         return productos;
     }
 
-    // Obtener un producto por ID
+    // Metodo para obtener un producto por ID
     @GetMapping("/{id}")
     public ResponseEntity<Producto> obtenerPorId(@PathVariable Long id) {
         Optional<Producto> producto = productos.stream().filter(p -> p.getId().equals(id)).findFirst();
         return producto.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Crear un nuevo producto
+    // Metodo para crear un nuevo producto
     @PostMapping
     public ResponseEntity<Producto> crearProducto(@RequestBody Producto nuevoProducto) {
         nuevoProducto.setId((long) (productos.size() + 1)); // Asignar un ID único
@@ -44,7 +44,7 @@ public class ProductoController {
         return new ResponseEntity<>(nuevoProducto, HttpStatus.CREATED);
     }
 
-    // Actualizar un producto existente
+    // Metodo para actualizar un producto existente
     @PutMapping("/{id}")
     public ResponseEntity<Producto> actualizarProducto(@PathVariable Long id, @RequestBody Producto productoActualizado) {
         Optional<Producto> productoExistente = productos.stream().filter(p -> p.getId().equals(id)).findFirst();
@@ -58,7 +58,7 @@ public class ProductoController {
         }
     }
 
-    // Eliminar un producto
+    // Metodo para eliminar un producto
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarProducto(@PathVariable Long id) {
         boolean eliminado = productos.removeIf(p -> p.getId().equals(id));
