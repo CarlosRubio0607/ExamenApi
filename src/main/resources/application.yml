@@ -1,0 +1,9 @@
+server:
+  port: 9090
+  servlet:
+    contextPath: /ms-api-examen
+    
+spring:
+  web:
+    resources:
+      add-mappings: false
